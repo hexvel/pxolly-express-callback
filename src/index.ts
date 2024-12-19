@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import process from "process";
 
 import { IEvent } from "./types/event.ts";
+import { HttpClient } from "./utils/HttpClient.ts";
+import { VkApi } from "./utils/VkApi.ts";
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ app.use(express.json());
 app.post("/callback", async (req: Request, res: Response) => {
     const event: IEvent = req.body as IEvent;
     const handler = eventHandlers[event.type];
+    const vkApi = new VkApi(process.env.VK_ACCESS_TOKEN as string);
 
     if (!handler) {
         console.error(`Handler for event type ${event.type} not found`);
@@ -24,7 +27,7 @@ app.post("/callback", async (req: Request, res: Response) => {
     }
 
     try {
-        return await handler.handle(event, res);
+        return await handler.handle(event, res, vkApi);
     } catch (error) {
         console.error(`Error processing event of type: ${event.type}`, error);
         res.status(500).send("Internal server error");
