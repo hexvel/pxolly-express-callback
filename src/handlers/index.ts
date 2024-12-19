@@ -5,6 +5,7 @@ import { BaseHandler } from "./BaseHandler.ts";
 import { InviteUserHandler } from "./InviteUser.ts";
 import { ResetThemeHandler } from "./resetTheme.ts";
 import { DeleteForAllHandler } from "./deleteForAll.ts";
+import { ChatPhotoUpdateHandler } from "./ChatPhotoUpdate.ts";
 
 const handlers: BaseHandler[] = [
     new ConfirmationHandler(),
@@ -13,6 +14,7 @@ const handlers: BaseHandler[] = [
     new SetThemeHandler(),
     new ResetThemeHandler(),
     new DeleteForAllHandler(),
+    new ChatPhotoUpdateHandler(),
 ];
 
 export const eventHandlers: Record<string, BaseHandler> = handlers.reduce(

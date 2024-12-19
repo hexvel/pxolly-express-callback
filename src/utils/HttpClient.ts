@@ -83,4 +83,16 @@ export class HttpClient {
     ): Promise<AxiosResponse<T>> {
         return await axios.post<T>(url, data, config);
     }
+
+    /**
+     * Выполняет GET-запрос на произвольный URL.
+     * @param url - URL, на который нужно отправить запрос.
+     * @param config - Дополнительная конфигурация.
+     */
+    public async getFromUrl<T>(
+        url: string,
+        config: AxiosRequestConfig = {}
+    ): Promise<AxiosResponse<T>> {
+        return await axios.get<T>(url, config);
+    }
 }

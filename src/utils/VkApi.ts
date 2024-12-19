@@ -1,7 +1,7 @@
 import { HttpClient } from "./HttpClient.ts";
 
 export class VkApi {
-    private httpClient: HttpClient;
+    public httpClient: HttpClient;
     private apiVersion: string;
 
     constructor(accessToken: string, apiVersion: string = "5.228") {
