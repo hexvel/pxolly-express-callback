@@ -1,6 +1,6 @@
-import { ConfirmationHandler } from "./ConfirmationHandler";
-import { SyncHandler } from "./SyncHandler";
-import { BaseHandler } from "./BaseHandler";
+import { ConfirmationHandler } from "./ConfirmationHandler.ts";
+import { SyncHandler } from "./SyncHandler.ts";
+import { BaseHandler } from "./BaseHandler.ts";
 
 const handlers: BaseHandler[] = [new ConfirmationHandler(), new SyncHandler()];
 

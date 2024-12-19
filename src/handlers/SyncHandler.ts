@@ -1,12 +1,11 @@
 import { Response } from "express";
-import { BaseHandler } from "./BaseHandler";
-import { IEvent } from "@/types/event";
+import { BaseHandler } from "./BaseHandler.ts";
+import { IEvent } from "../types/event.ts";
 
 export class SyncHandler extends BaseHandler {
     readonly eventType = "sync";
 
-    handle(event: IEvent, res: Response): Response {
-        this.log(event);
+    async handle(_: IEvent, res: Response): Promise<Response> {
         try {
             // мдээээ
             return res.json({ ok: true });

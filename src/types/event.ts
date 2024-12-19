@@ -1,4 +1,4 @@
-import { IObject } from "./object";
+import { IObject } from "./object.ts";
 
 export interface IEvent {
     type: string;

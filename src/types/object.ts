@@ -1,5 +1,5 @@
-import { IMessage } from "./message";
-import { IUser } from "./user";
+import { IMessage } from "./message.ts";
+import { IUser } from "./user.ts";
 
 export interface IObject {
     date?: number;

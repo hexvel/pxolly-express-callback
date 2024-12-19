@@ -1,8 +1,9 @@
 import express, { Express, Request, Response } from "express";
-import { eventHandlers } from "./handlers";
+import { eventHandlers } from "./handlers/index.ts";
 import dotenv from "dotenv";
+import process from "process";
 
-import { IEvent } from "@/types/event";
+import { IEvent } from "./types/event.ts";
 
 dotenv.config();
 
@@ -11,7 +12,8 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.post("/callback", (req: Request, res: Response) => {
+// @ts-ignore: Unreachable code error
+app.post("/callback", async (req: Request, res: Response) => {
     const event: IEvent = req.body as IEvent;
     const handler = eventHandlers[event.type];
 
@@ -22,8 +24,7 @@ app.post("/callback", (req: Request, res: Response) => {
     }
 
     try {
-        handler.handle(event, res);
-        return;
+        return await handler.handle(event, res);
     } catch (error) {
         console.error(`Error processing event of type: ${event.type}`, error);
         res.status(500).send("Internal server error");
