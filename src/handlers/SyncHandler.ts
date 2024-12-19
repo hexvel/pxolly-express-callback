@@ -12,11 +12,26 @@ export class SyncHandler extends BaseHandler {
         vkApi: VkApi
     ): Promise<Response> {
         try {
+            const message = event.object?.message;
+
+            if (!message) {
+                return res.status(400).json({ error: "Invalid event data" });
+            }
+
+            const { text, from_id, date, conversation_message_id } = message;
+
+            // Я сделал эти проверки тупо для того чтобы редактор не доёбывал, а так они не нужны.
+            if (!text || !from_id || !date || !conversation_message_id) {
+                return res.status(400).json({
+                    error: "Missing required message properties",
+                });
+            }
+
             const peer = await vkApi.searchPeer(
-                event.object?.message?.text || "",
-                event.object?.message?.from_id || 0,
-                event.object?.message?.date || 0,
-                event.object?.message?.conversation_message_id || 0
+                text,
+                from_id,
+                date,
+                conversation_message_id
             );
             return res.json({ ok: true, local_id: peer });
         } catch (error) {

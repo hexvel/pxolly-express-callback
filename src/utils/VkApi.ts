@@ -67,4 +67,12 @@ export class VkApi {
 
         return response.response;
     }
+
+    async sendMessage(chat_id: number, message: string) {
+        await this.callMethod("messages.send", {
+            chat_id,
+            message,
+            random_id: 0,
+        });
+    }
 }
