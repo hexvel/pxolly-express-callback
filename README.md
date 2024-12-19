@@ -1,6 +1,6 @@
 # Pxolly Express Callback
 
-This project is an Express-based server that handles various events from the VK API.
+This project is an Express-based server that handles various events from the Pxolly-Webhook.
 
 ## Table of Contents
 
